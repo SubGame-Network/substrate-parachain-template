@@ -1,0 +1,19 @@
+version: "3"
+
+services: 
+    subgame-rococo-validator01:
+        image: parity/rococo:rococo-v1
+        container_name: subgame-rococo-validator01
+        hostname: subgame-rococo-validator01
+        restart: always
+        volumes: 
+            - ./validator01_storage:/subgame/storage
+        working_dir: /subgame
+        command: "--chain rococo \
+            --validator \
+            --name subgame-rococo-validator01 \
+            --base-path ./storage"
+
+networks:
+    default:
+        driver: bridge

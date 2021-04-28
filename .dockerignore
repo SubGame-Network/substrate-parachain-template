@@ -13,8 +13,3 @@
 .local
 
 local-test
-
-**/resources/
-**/storage/
-**/validator_1_storage/
-**/validator_2_storage/

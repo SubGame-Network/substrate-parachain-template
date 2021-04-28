@@ -1,0 +1,26 @@
+version: "3"
+
+services: 
+    subgame-collator:
+        image: subgame-network/subgame-collator:1.0.0
+        container_name: subgame-collator
+        hostname: subgame-collator
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        ports: 
+            - 30333:30333
+            - 9944:9944
+            - 9933:9933
+        environment: 
+            - cargoBuildEverytime=false
+            - nodeKey=3b08ca3e98e542c5747bfe6cd118ef2a18c89d8f10f32211a316406f87780e6d
+            - parachainid=1921271135
+        volumes: 
+            - .:/subgame
+        entrypoint: bash -c "./scripts/docker_entrypoint.sh"
+
+networks:
+    default:
+        driver: bridge

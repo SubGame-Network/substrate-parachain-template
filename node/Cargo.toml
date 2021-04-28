@@ -202,16 +202,16 @@ git = "https://github.com/paritytech/polkadot"
 branch = 'rococo-v1'
 
 [[bin]]
-name = 'parachain-collator'
+name = 'subgame-collator'
 
 [package]
-authors = ['Anonymous']
+authors = ['SubGame']
 build = 'build.rs'
-description = 'A new Cumulus FRAME-based Substrate node, ready for hacking.'
+description = 'SubGame Network fork from Substrate'
 edition = '2018'
-homepage = 'https://substrate.dev'
-license = 'Unlicense'
-name = 'parachain-collator'
+homepage = 'https://www.subgame.org/'
+license = 'Apache-2.0 License'
+name = 'subgame-collator'
 repository = 'https://github.com/substrate-developer-hub/substrate-parachain-template'
 version = '2.0.0'
 [package.metadata.docs.rs]
