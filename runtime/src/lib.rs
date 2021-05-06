@@ -40,7 +40,7 @@ use xcm_executor::{Config, XcmExecutor};
 
 // A few exports that help ease life for downstream crates.
 pub use frame_support::{
-	construct_runtime, parameter_types,
+	construct_runtime, parameter_types, ord_parameter_types,
 	traits::{Randomness, IsInVec, All},
 	weights::{
 		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
@@ -56,6 +56,15 @@ pub use sp_runtime::{Perbill, Permill, Perquintill};
 
 /// Import the template pallet.
 pub use template;
+
+// chips 
+pub use pallet_chips;
+// game template
+pub use pallet_gametemplates;
+// game center
+pub use pallet_gamecenter;
+// game 1：guess hash
+pub use pallet_gametemplates_guess_hash;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -424,6 +433,53 @@ impl template::Config for Runtime {
 	type Event = Event;
 }
 
+/*** Pallet Chips ***/
+ord_parameter_types! {
+	pub const W3FValidity: AccountId = AccountId::from(
+		// 5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL
+		hex_literal::hex!("1cbd2d43530a44705ad088af313e18f80b53ef16b36177cd4b77b846f2a5f07c")
+	);
+}
+impl pallet_chips::Config for Runtime {
+	type Event = Event;
+	type Balances = pallet_balances::Pallet<Runtime>;
+	type ChipBalance = u128;
+	type MasterAddress = W3FValidity;
+	type WeightInfo = ();
+}
+/*** Pallet Chips ***/
+
+/*** Pallet GameTemplate ***/
+ord_parameter_types! {
+	pub const TemplateOwner: AccountId = AccountId::from(
+		// 5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL
+		hex_literal::hex!("1cbd2d43530a44705ad088af313e18f80b53ef16b36177cd4b77b846f2a5f07c")
+	);
+}
+impl pallet_gametemplates::Config for Runtime {
+	type Event = Event;
+	type WeightInfo = ();
+	type OwnerAddress = TemplateOwner;
+}
+/*** Pallet GameTemplate ***/
+
+/*** Pallet GameCenter ***/
+impl pallet_gamecenter::Config for Runtime {
+	type Event = Event;
+	type WeightInfo = ();
+	type GuessHash = GameGuessHashModule;
+}
+/*** Pallet GameCenter ***/
+
+/*** Pallet Game1: Guess Hash ***/
+impl pallet_gametemplates_guess_hash::Config for Runtime {
+	type Event = Event;
+	type GameIndex = u32;
+	type WeightInfo = ();
+	type Chips = Chips;
+}
+/*** Pallet Game1: Guess Hash ***/
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -443,6 +499,10 @@ construct_runtime!(
 		CumulusXcm: cumulus_pallet_xcm::{Pallet, Origin},
 		Sudo: pallet_sudo::{Pallet, Call, Config<T>, Storage, Event<T>},
 		TemplatePallet: template::{Pallet, Call, Storage, Event<T>},
+        Chips:  pallet_chips::{Pallet, Call, Storage, Event<T>},
+        GameTemplates:	pallet_gametemplates::{Pallet, Call, Storage, Event<T>},
+        GameCenter:	pallet_gamecenter::{Pallet, Call, Storage, Event<T>},
+		GameGuessHashModule: pallet_gametemplates_guess_hash::{Pallet, Call, Storage, Event<T>},
 	}
 );
 

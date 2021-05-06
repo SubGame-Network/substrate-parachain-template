@@ -64,7 +64,6 @@ branch = 'rococo-v1'
 version = '3.0.0'
 
 [dependencies.hex-literal]
-optional = true
 version = '0.3.1'
 
 [dependencies.pallet-balances]
@@ -237,6 +236,26 @@ default-features = false
 package = 'pallet-template'
 path = '../pallets/template'
 
+[dependencies.pallet-chips]
+default-features = false
+package = 'pallet-chips'
+path = '../pallets/chips'
+
+[dependencies.pallet-gametemplates]
+default-features = false
+package = 'pallet-gametemplates'
+path = '../pallets/gametemplates'
+
+[dependencies.pallet-gamecenter]
+default-features = false
+package = 'pallet-gamecenter'
+path = '../pallets/gamecenter'
+
+[dependencies.pallet-gametemplates-guess-hash]
+default-features = false
+package = 'pallet-gametemplates-guess-hash'
+path = '../pallets/gametemplates-guess-hash'
+
 [features]
 default = ['std']
 runtime-benchmarks = [
@@ -244,7 +263,7 @@ runtime-benchmarks = [
 	'frame-benchmarking',
 	'frame-support/runtime-benchmarks',
 	'frame-system-benchmarking',
-	'hex-literal',
+	# 'hex-literal',
 	'frame-system/runtime-benchmarks',
 	'pallet-balances/runtime-benchmarks',
 	'pallet-timestamp/runtime-benchmarks',
