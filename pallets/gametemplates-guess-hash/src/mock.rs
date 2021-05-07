@@ -1,6 +1,5 @@
 use pallet_chips;
 use crate as pallet_gametemplates_guess_hash;
-use balances;
 use crate as hex_literal;
 use sp_core::H256;
 use frame_support::ord_parameter_types;
@@ -20,10 +19,10 @@ frame_support::construct_runtime!(
 		NodeBlock = Block,
 		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
-		System: frame_system::{Module, Call, Config, Storage, Event<T>},
-		Balances: balances::{Module, Call, Storage, Config<T>, Event<T>},
-		Chips: pallet_chips::{Module, Call, Storage, Event<T>},
-		GameGuessHashModule: pallet_gametemplates_guess_hash::{Module, Call, Storage, Event<T>},
+		System: frame_system::{Pallet, Call, Config, Storage, Event<T>},
+		Balances: balances::{Pallet, Call, Storage, Config<T>, Event<T>},
+		Chips: pallet_chips::{Pallet, Call, Storage, Event<T>},
+		GameGuessHashModule: pallet_gametemplates_guess_hash::{Pallet, Call, Storage, Event<T>},
 	}
 );
 
@@ -55,6 +54,7 @@ impl system::Config for Test {
 	type OnKilledAccount = ();
 	type SystemWeightInfo = ();
 	type SS58Prefix = SS58Prefix;
+	type OnSetCode = ();
 }
 
 
@@ -79,7 +79,7 @@ parameter_types! {
 }
 impl pallet_chips::Config for Test {
 	type Event = Event;
-	type Balances = balances::Module<Self>;
+	type Balances = balances::Pallet<Self>;
 	type ChipBalance = u128;
 	type MasterAddress = MasterAddress;
 	type WeightInfo = ();

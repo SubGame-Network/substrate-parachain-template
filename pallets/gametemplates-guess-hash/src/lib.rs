@@ -15,11 +15,11 @@ use alloc::{format, str, string::*};
 // use chips trait
 use pallet_chips::{ChipsTrait, ChipsTransfer};
 
-#[cfg(test)]
-mod mock;
+// #[cfg(test)]
+// mod mock;
 
-#[cfg(test)]
-mod tests;
+// #[cfg(test)]
+// mod tests;
 
 mod default_weight;
 

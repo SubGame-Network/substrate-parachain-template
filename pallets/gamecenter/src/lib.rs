@@ -10,11 +10,11 @@ use frame_system::ensure_signed;
 use codec::{Encode, Decode};
 use pallet_gametemplates_guess_hash::{GuessHashTrait, GuessHashFunc};
 
-#[cfg(test)]
-mod mock;
+// #[cfg(test)]
+// mod mock;
 
-#[cfg(test)]
-mod tests;
+// #[cfg(test)]
+// mod tests;
 
 mod default_weight;
 

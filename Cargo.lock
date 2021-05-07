@@ -4706,11 +4706,11 @@ version = "3.0.0"
 dependencies = [
  "frame-support 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
  "frame-system 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
- "pallet-balances 3.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "pallet-balances 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
  "parity-scale-codec",
  "serde",
- "sp-core 3.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-io 3.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sp-core 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
+ "sp-io 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
  "sp-runtime 3.0.0 (git+https://github.com/paritytech/substrate.git?branch=rococo-v1)",
 ]
 

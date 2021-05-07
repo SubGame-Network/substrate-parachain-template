@@ -1,5 +1,4 @@
 use crate as pallet_chips;
-use balances;
 use crate as hex_literal;
 use sp_core::H256;
 use frame_support::ord_parameter_types;
@@ -19,9 +18,9 @@ frame_support::construct_runtime!(
 		NodeBlock = Block,
 		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
-		System: frame_system::{Module, Call, Config, Storage, Event<T>},
-		Balances: balances::{Module, Call, Storage, Config<T>, Event<T>},
-		Chips: pallet_chips::{Module, Call, Storage, Event<T>},
+		System: frame_system::{Pallet, Call, Config, Storage, Event<T>},
+		Balances: balances::{Pallet, Call, Storage, Config<T>, Event<T>},
+		Chips: pallet_chips::{Pallet, Call, Storage, Event<T>},
 	}
 );
 
@@ -53,6 +52,7 @@ impl system::Config for Test {
 	type OnKilledAccount = ();
 	type SystemWeightInfo = ();
 	type SS58Prefix = SS58Prefix;
+	type OnSetCode = ();
 }
 
 
@@ -76,7 +76,7 @@ parameter_types! {
 }
 impl pallet_chips::Config for Test {
 	type Event = Event;
-	type Balances = balances::Module<Self>;
+	type Balances = balances::Pallet<Self>;
 	type ChipBalance = u128;
 	type MasterAddress = MasterAddress;
 	type WeightInfo = ();
@@ -93,7 +93,8 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		balances: vec![(1, 1000000), (2, 1000000), (3, 1000000), (4, 1000000), (5, 1000000)],
 	}.assimilate_storage(&mut t)
 	.unwrap();
-	let mut ext: sp_io::TestExternalities = t.into();
-	ext.execute_with(|| System::set_block_number(1));
-	ext
+	// let mut ext: sp_io::TestExternalities = t.init();
+	// ext.execute_with(|| System::set_block_number(1));
+	// ext
+	t.into()
 }
